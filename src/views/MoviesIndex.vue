@@ -1,22 +1,47 @@
 <template>
   <div class="movies-index">
-    <div v-for="movie in movies" v-bind:key="movie.id">
+    <div>
+      <input
+        type="text"
+        v-model="search"
+        list="titles"
+        placeholder="Search..."
+      />
+      <datalist id="titles">
+        <option v-for="movie in movies" v-bind:key="movie.title">{{
+          movie.title
+        }}</option>
+      </datalist>
+    </div>
+    <div>
+      <button v-on:click="sortattr = 'title'">Sort by Title</button>
+    </div>
+    <div
+      v-for="movie in orderBy(filterBy(movies, search), sortattr, 'title')"
+      v-bind:key="movie.id"
+    >
       <h1>{{ movie.title }}</h1>
-      <p>Year: {{ movie.year }} </p>
-      <p>Plot: {{ movie.plot }} </p>
-      <p>Director: {{ movie.director }} </p>
-      <router-link to="/movies/show">More Info</router-link>
+      <p>{{ movie.plot }}</p>
+      <p>{{ movie.director }}</p>
+      <p>{{ movie.year }}</p>
+      <router-link :to="`/movies/${movie.id}`">
+        <img v-bind:src="movie.image" alt="" />
+      </router-link>
     </div>
   </div>
 </template>
 
 <script>
 import axios from "axios";
+import Vue2Filters from "vue2-filters";
 
 export default {
+  mixins: [Vue2Filters.mixin],
   data: function () {
     return {
       movies: [],
+      search: "",
+      sortattr: ""
     };
   },
   created: function () {
@@ -30,6 +55,8 @@ export default {
         console.log(error.response.data.errors);
       });
   },
-  methods: {},
+  methods: {
+    
+  },
 };
 </script>

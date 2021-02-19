@@ -1,11 +1,10 @@
 <template>
   <div class="movies-show">
-    
-      <h1>{{ movie.title }}</h1>
-      <p>Year: {{ movie.year }} </p>
-      <p>Plot: {{ movie.plot }} </p>
-      <p>Director: {{ movie.director }} </p>
-    
+    <h1>{{ movie.title }}</h1>
+    <h2>{{ movie.plot }}</h2>
+    <p>Director: {{ movie.director }}</p>
+    <p>Year: {{ movie.year }}</p>
+    <router-link :to="`/movies/${movie.id}/edit`">Edit</router-link>
   </div>
 </template>
 
@@ -13,22 +12,23 @@
 import axios from "axios";
 
 export default {
-  data: function () {
+  data: function() {
     return {
       movie: {},
+      errors: []
     };
   },
-  created: function () {
+  created: function() {
     axios
       .get(`/api/movies/${this.$route.params.id}`)
-      .then((response) => {
+      .then(response => {
         this.movie = response.data;
         console.log(this.movie);
       })
-      .catch((error) => {
+      .catch(error => {
         console.log(error.response.data.errors);
       });
   },
-  methods: {},
+  methods: {}
 };
 </script>
