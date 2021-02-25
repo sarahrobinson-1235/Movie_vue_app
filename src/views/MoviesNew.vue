@@ -1,18 +1,17 @@
 <template>
   <div class="movies-new">
     <form v-on:submit.prevent="createMovie()">
-      <h1>Add New Movie</h1>
-      Title: <input type="text" v-model="title" />
-      <br />
-      Director: <input type="text" v-model="director" />
-      <br />
-      Plot: <input type="text" v-model="plot" />
-      <br />
-      <small>
-        {{ 700-plot.length }} characters remaining
-      </small> <br/>
-      Year: <input type="text" v-model="year" />
-      <input type="submit" class="btn btn-primary" value="Create" />
+      <label for="movie">Title</label>
+      <input id="movie" type="text" v-model="title" /> <br>
+      <label for="movie">Director</label>
+      <input id="movie" type="text" v-model="director" /> <br>
+      <label for="movie">Plot</label>
+      <input id="movie" type="text" v-model="plot" /> <br>
+      <label for="movie">Year</label>
+      <input id="movie" type="text" v-model="year" /> <br>
+      <label for="movie">Image</label>
+      <input id="movie" type="text" v-model="image" /> <br>
+      <input type="submit" value="Create" /> 
     </form>
   </div>
 </template>
@@ -27,6 +26,7 @@ export default {
       director: "",
       year: "",
       plot: "",
+      image: "",
       errors: []
     };
   },

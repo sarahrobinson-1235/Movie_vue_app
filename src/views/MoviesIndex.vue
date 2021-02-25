@@ -21,12 +21,11 @@
       v-bind:key="movie.id"
     >
       <h1>{{ movie.title }}</h1>
+      <img src="movie.image" />
       <p>{{ movie.plot }}</p>
       <p>{{ movie.director }}</p>
       <p>{{ movie.year }}</p>
-      <router-link :to="`/movies/${movie.id}`">
-        <img v-bind:src="movie.image" alt="" />
-      </router-link>
+      <router-link :to="`/movies/${movie.id}`">More info</router-link>
     </div>
   </div>
 </template>
@@ -37,26 +36,24 @@ import Vue2Filters from "vue2-filters";
 
 export default {
   mixins: [Vue2Filters.mixin],
-  data: function () {
+  data: function() {
     return {
       movies: [],
       search: "",
       sortattr: ""
     };
   },
-  created: function () {
+  created: function() {
     axios
       .get("/api/movies")
-      .then((response) => {
+      .then(response => {
         console.log(response.data);
         this.movies = response.data;
       })
-      .catch((error) => {
+      .catch(error => {
         console.log(error.response.data.errors);
       });
   },
-  methods: {
-    
-  },
+  methods: {}
 };
 </script>

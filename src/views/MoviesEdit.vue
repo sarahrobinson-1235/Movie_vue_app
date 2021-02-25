@@ -1,6 +1,6 @@
 <template>
   <div class="movies-edit">
-    <form v-on:submit.prevent="updateMovie()">
+    <!-- <form v-on:submit.prevent="updateMovie()">
       <h1>Edit Movie</h1>
       Title: <input type="text" v-model="movie.title" />
       <br />
@@ -11,6 +11,19 @@
       Year: <input type="text" v-model="movie.year" />
       <button v-on:click="updateMovie(movie)">Update</button>
       <button v-on:click="destroyMovie()">Destroy</button>
+    </form> -->
+
+    <form v-on:submit.prevent="updateMovie()">
+      <label for="movie">Title</label>
+      <input id="movie" type="text" v-model="movie.title" /> <br>
+      <label for="movie">Director</label>
+      <input id="movie" type="text" v-model="movie.director" /> <br>
+      <label for="movie">Plot</label>
+      <input id="movie" type="text" v-model="movie.plot" /> <br>
+      <label for="movie">Year</label>
+      <input id="movie" type="text" v-model="movie.year" /> <br>
+      <input v-on:click="updateMovie(movie)" type="submit" value="Update" />
+      <input v-on:click="destroyMovie(movie)" type="button" value="Delete" />
     </form>
   </div>
 </template>
