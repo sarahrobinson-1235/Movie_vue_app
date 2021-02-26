@@ -8,7 +8,6 @@
     Plot: <input type="text" v-model="newPlot" />
     <br />
     Year: <input type="text" v-model="newYear" /> <br />
-    Image: <input type="text" v-model="newImage" />
     <button v-on:click="createMovie()">Create</button>
     <h1 title="Check out the Movies tab for more info">All Movies</h1>
     <div v-for="movie in movies" v-bind:key="movie.id">
@@ -29,7 +28,6 @@ export default {
       newDirector: "",
       newYear: "",
       newPlot: "",
-      newImage: ""
     };
   },
   created: function() {
@@ -39,11 +37,11 @@ export default {
     indexMovies: function() {
       axios
         .get("/api/movies")
-        .then(response => {
+        .then((response) => {
           console.log(response.data);
           this.movies = response.data;
         })
-        .catch(error => {
+        .catch((error) => {
           console.log(error.response.data.errors);
         });
     },
@@ -52,18 +50,18 @@ export default {
         title: this.newTitle,
         director: this.newDirector,
         plot: this.newPlot,
-        year: this.newYear
+        year: this.newYear,
       };
       axios
         .post("http://localhost:3000/api/movies", params)
-        .then(response => {
+        .then((response) => {
           console.log(response.data);
           this.movies.push(response.data);
         })
-        .catch(error => {
+        .catch((error) => {
           console.log(error.response.data.errors);
         });
-    }
-  }
+    },
+  },
 };
 </script>
